@@ -2,7 +2,7 @@ name: flutter_datetime_formfield
 description: A date time picker form field
 version: 0.0.1
 author: Junchao Zhong
-homepage:
+homepage: https://github.com/jczhong/flutter_datetime_formfield.git
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
