@@ -75,47 +75,47 @@ class DateTimeFormField extends StatelessWidget {
             TimeOfDay time = TimeOfDay(hour: 0, minute: 0);
             if (onlyDate) {
               date = await showDatePicker(
-                  context: context,
-                  initialDate: state.value,
-                  firstDate: firstDate,
-                  lastDate: lastDate,
+                context: context,
+                initialDate: state.value,
+                firstDate: firstDate,
+                lastDate: lastDate,
               );
               if (date != null) {
                 state.didChange(date);
               }
             } else if (onlyTime) {
               time = await showTimePicker(
-                  context: context,
-                  initialTime: TimeOfDay.fromDateTime(state.value),
+                context: context,
+                initialTime: TimeOfDay.fromDateTime(state.value),
               );
               if (time != null) {
                 state.didChange(DateTime(
-                    initialValue.year,
-                    initialValue.month,
-                    initialValue.day,
-                    time.hour,
-                    time.minute,
+                  initialValue.year,
+                  initialValue.month,
+                  initialValue.day,
+                  time.hour,
+                  time.minute,
                 ));
               }
             } else {
               date = await showDatePicker(
-                  context: context,
-                  initialDate: state.value,
-                  firstDate: firstDate,
-                  lastDate: lastDate,
+                context: context,
+                initialDate: state.value,
+                firstDate: firstDate,
+                lastDate: lastDate,
               );
               if (date != null) {
                 time = await showTimePicker(
-                    context: context,
-                    initialTime: TimeOfDay.fromDateTime(state.value),
+                  context: context,
+                  initialTime: TimeOfDay.fromDateTime(state.value),
                 );
                 if (time != null) {
                   state.didChange(DateTime(
-                      date.year,
-                      date.month,
-                      date.day,
-                      time.hour,
-                      time.minute,
+                    date.year,
+                    date.month,
+                    date.day,
+                    time.hour,
+                    time.minute,
                   ));
                 }
               }
