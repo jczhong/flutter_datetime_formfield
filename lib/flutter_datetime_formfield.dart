@@ -19,7 +19,7 @@ class DateTimeFormField extends StatelessWidget {
 
   DateTimeFormField({
     @required DateTime initialValue,
-    @required this.label,
+    @required String label,
     DateFormat formatter,
     this.onSaved,
     this.validator,
@@ -30,27 +30,10 @@ class DateTimeFormField extends StatelessWidget {
     DateTime firstDate,
     DateTime lastDate,
   })  : assert(!onlyDate || !onlyTime),
-        assert(() {
-          if (onlyDate) {
-            initialValue = DateTime(
-                initialValue.year, initialValue.month, initialValue.day);
-            if (formatter == null) {
-              formatter = DateFormat("EEE, MMM d, yyyy");
-            }
-          }
-          if (onlyTime) {
-            if (formatter == null) {
-              formatter = DateFormat("h:mm a");
-            }
-          }
-          if (formatter == null) {
-            formatter = DateFormat("EE, MMM d, yyyy h:mma");
-          }
-          return true;
-        }()),
         initialValue = initialValue ?? DateTime.now(),
-        formatter = formatter,
-        firstDate = firstDate ?? DateTime(1970),
+        label = label ?? "Date Time",
+        formatter = formatter ?? (onlyDate ? DateFormat("EEE, MMM d, yyyy") : (onlyTime ? DateFormat("h:mm a") : DateFormat("EE, MMM d, yyyy h:mma"))),
+        firstDate =  firstDate ?? DateTime(1970),
         lastDate = lastDate ?? DateTime(2100);
 
   @override
