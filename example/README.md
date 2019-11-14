@@ -1,16 +1,99 @@
-# example
+# Example of DateTimeFormField
+```
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
 
-Example App of DateTimeFormField widget
+void main() => runApp(MyApp());
 
-## Getting Started
+class MyApp extends StatelessWidget {
+  final String title;
+  final DateTime initialDateTime;
 
-This project is a starting point for a Flutter application.
+  MyApp({Key key, this.title, this.initialDateTime}) : super();
 
-A few resources to get you started if this is your first Flutter project:
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'DateTimeFormField Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: title ?? 'Home Page', initialDateTime: initialDateTime ?? DateTime.now(),),
+    );
+  }
+}
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, @required this.title, @required this.initialDateTime}) : super(key: key);
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  final String title;
+  final DateTime initialDateTime;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  GlobalKey<FormState> _formKey;
+  DateTime _dateTime;
+
+  @override
+  void initState() {
+    _formKey = GlobalKey<FormState>();
+    super.initState();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              DateTimeFormField(
+                initialValue: widget.initialDateTime,
+                label: "Date Time",
+                validator: (DateTime dateTime) {
+                  if (dateTime == null) {
+                    return "Date Time Required";
+                  }
+                  return null;
+                },
+                onSaved: (DateTime dateTime) => _dateTime = dateTime,
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: RaisedButton(
+                  child: Text("Submit"),
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      _formKey.currentState.save();
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Date Time"),
+                            content: Text(_dateTime.toIso8601String()),
+                          );
+                        },
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
