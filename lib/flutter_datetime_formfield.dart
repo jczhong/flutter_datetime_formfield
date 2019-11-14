@@ -4,19 +4,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+/// A date time pick form field widget.
 class DateTimeFormField extends StatelessWidget {
+  /// The initial date time, default value is 'DateTime.now()'.
   final DateTime initialValue;
+  /// Save value function of form field.
   final FormFieldSetter<DateTime> onSaved;
+  /// Validate function of form field.
   final FormFieldValidator<DateTime> validator;
+  /// Whether validate every time, default value is false.
   final bool autovalidate;
   final bool enabled;
+  /// The label of form field, default value is 'Date Time'.
   final String label;
+  /// The format of displaying date time in form field, default value is 'DateFormat("EE, MMM d, yyyy h:mma")' in date and time mode,
+  /// 'DateFormat("EEE, MMM d, yyyy")' in date only mode,
+  /// 'DateFormat("h:mm a") in time only mode.
   final DateFormat formatter;
+  /// Only show and edit date, defalut value is false.
   final bool onlyDate;
+  /// Only show and edit time, default value is false. [onlyDate] and [onlyTime] cannot be set to true at the same time.
   final bool onlyTime;
+  /// The first date time of picking, default value is 'DateTime(1970)'.
   final DateTime firstDate;
+  /// The last date time of picking, default value is 'DateTime(2100)'.
   final DateTime lastDate;
 
+  /// Create a DateTimeFormField.
+  /// The [onlyDate] and [onlyTime] arguments can not be set to true at the same time.
   DateTimeFormField({
     @required DateTime initialValue,
     @required String label,
