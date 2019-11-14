@@ -103,12 +103,12 @@ class _MyHomePageState extends State<MyHomePage> {
 ## Parameters
 initialValue - The intial date time, default value is 'DateTime.now()'  
 label - The label of form field, default value is 'Date Time'  
-onlyDate - Only show and edit date, defalut value is false  
-onlyTime - Only show and edit time, default value is false. onlyDate and onlyTime can not both be true.
-format - The format of displaying date time in form field, default value is 'DateFormat("EE, MMM d, yyyy h:mma")' in date and time mode, 'DateFormat("EEE, MMM d, yyyy")' in date only mode, 'DateFormat("h:mm a") in time only mode  
+onlyDate - Only show and edit date, default value is false  
+onlyTime - Only show and edit time, default value is false. onlyDate and onlyTime cannot be set to true at the same time.  
+formatter - The format of displaying date time in form field, default value is 'DateFormat("EE, MMM d, yyyy h:mma")' in date and time mode, 'DateFormat("EEE, MMM d, yyyy")' in date only mode, 'DateFormat("h:mm a") in time only mode  
 autovalidate - Whether validate every time, default value is false  
-validate - Validate function of form field  
-save - Save value function of form field
+validator - Validate function of form field  
+onSaved - Save value function of form field
   
   
 > **Notice** DateTimeFormField must has Material Widget ancestor such as MaterialApp
