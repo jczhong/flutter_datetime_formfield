@@ -1,6 +1,6 @@
 name: flutter_datetime_formfield
 description: A date time picker form field which has material design theme. It supports form operations such as validate and save. You can change its display format by setting parameter format.
-version: 0.1.0
+version: 0.1.1
 author: Junchao Zhong <jczhong115@gmail.com>
 homepage: https://github.com/jczhong/flutter_datetime_formfield.git
 

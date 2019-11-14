@@ -21,7 +21,7 @@ class DateTimeFormField extends StatelessWidget {
   /// 'DateFormat("EEE, MMM d, yyyy")' in date only mode,
   /// 'DateFormat("h:mm a") in time only mode.
   final DateFormat formatter;
-  /// Only show and edit date, defalut value is false.
+  /// Only show and edit date, default value is false.
   final bool onlyDate;
   /// Only show and edit time, default value is false. [onlyDate] and [onlyTime] cannot be set to true at the same time.
   final bool onlyTime;
