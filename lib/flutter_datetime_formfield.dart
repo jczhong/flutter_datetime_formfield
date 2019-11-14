@@ -32,8 +32,13 @@ class DateTimeFormField extends StatelessWidget {
   })  : assert(!onlyDate || !onlyTime),
         initialValue = initialValue ?? DateTime.now(),
         label = label ?? "Date Time",
-        formatter = formatter ?? (onlyDate ? DateFormat("EEE, MMM d, yyyy") : (onlyTime ? DateFormat("h:mm a") : DateFormat("EE, MMM d, yyyy h:mma"))),
-        firstDate =  firstDate ?? DateTime(1970),
+        formatter = formatter ??
+            (onlyDate
+                ? DateFormat("EEE, MMM d, yyyy")
+                : (onlyTime
+                    ? DateFormat("h:mm a")
+                    : DateFormat("EE, MMM d, yyyy h:mma"))),
+        firstDate = firstDate ?? DateTime(1970),
         lastDate = lastDate ?? DateTime(2100);
 
   @override

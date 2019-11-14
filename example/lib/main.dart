@@ -18,13 +18,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: title ?? 'Home Page', initialDateTime: initialDateTime ?? DateTime.now(),),
+      home: MyHomePage(
+        title: title ?? 'Home Page',
+        initialDateTime: initialDateTime ?? DateTime.now(),
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, @required this.title, @required this.initialDateTime}) : super(key: key);
+  MyHomePage({Key key, @required this.title, @required this.initialDateTime})
+      : super(key: key);
 
   final String title;
   final DateTime initialDateTime;
@@ -42,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _formKey = GlobalKey<FormState>();
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

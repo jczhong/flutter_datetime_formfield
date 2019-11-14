@@ -8,7 +8,10 @@ void main() {
     DateTime dateTime = DateTime.now();
     String textField = DateFormat("EE, MMM d, yyyy h:mma").format(dateTime);
 
-    await tester.pumpWidget(MyApp(title: "Home Page", initialDateTime: dateTime,));
+    await tester.pumpWidget(MyApp(
+      title: "Home Page",
+      initialDateTime: dateTime,
+    ));
 
     final labelFinder = find.text("Date Time");
     final textFieldFinder = find.text(textField);
