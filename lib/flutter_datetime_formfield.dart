@@ -3,6 +3,7 @@ library flutter_datetime_formfield;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'dart:io' show Platform;
 
 /// A date time pick form field widget.
 class DateTimeFormField extends StatelessWidget {
@@ -77,50 +78,104 @@ class DateTimeFormField extends StatelessWidget {
             DateTime date;
             TimeOfDay time = TimeOfDay(hour: 0, minute: 0);
             if (onlyDate) {
-              date = await showDatePicker(
-                context: context,
-                initialDate: state.value,
-                firstDate: firstDate,
-                lastDate: lastDate,
-              );
-              if (date != null) {
-                state.didChange(date);
+              if (Platform.isAndroid) {
+                date = await showDatePicker(
+                  context: context,
+                  initialDate: state.value,
+                  firstDate: firstDate,
+                  lastDate: lastDate,
+                );
+                if (date != null) {
+                  state.didChange(date);
+                }
+              } else {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext builder) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height / 4,
+                      child: CupertinoDatePicker(
+                        mode: CupertinoDatePickerMode.date,
+                        onDateTimeChanged:(DateTime dateTime) => state.didChange(dateTime),
+                        initialDateTime: state.value,
+                        minimumYear: firstDate.year,
+                        maximumYear: lastDate.year,
+                      ),
+                    );
+                  },
+                );
               }
             } else if (onlyTime) {
-              time = await showTimePicker(
-                context: context,
-                initialTime: TimeOfDay.fromDateTime(state.value),
-              );
-              if (time != null) {
-                state.didChange(DateTime(
-                  initialValue.year,
-                  initialValue.month,
-                  initialValue.day,
-                  time.hour,
-                  time.minute,
-                ));
-              }
-            } else {
-              date = await showDatePicker(
-                context: context,
-                initialDate: state.value,
-                firstDate: firstDate,
-                lastDate: lastDate,
-              );
-              if (date != null) {
+              if (Platform.isAndroid) {
                 time = await showTimePicker(
                   context: context,
                   initialTime: TimeOfDay.fromDateTime(state.value),
                 );
                 if (time != null) {
                   state.didChange(DateTime(
-                    date.year,
-                    date.month,
-                    date.day,
+                    initialValue.year,
+                    initialValue.month,
+                    initialValue.day,
                     time.hour,
                     time.minute,
                   ));
                 }
+              } else {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext builder) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height / 4,
+                      child: CupertinoDatePicker(
+                        mode: CupertinoDatePickerMode.time,
+                        onDateTimeChanged:(DateTime dateTime) => state.didChange(dateTime),
+                        initialDateTime: state.value,
+                        use24hFormat: false,
+                        minuteInterval: 1,
+                      ),
+                    );
+                  },
+                );
+              }
+            } else {
+              if (Platform.isAndroid) {
+                date = await showDatePicker(
+                  context: context,
+                  initialDate: state.value,
+                  firstDate: firstDate,
+                  lastDate: lastDate,
+                );
+                if (date != null) {
+                  time = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.fromDateTime(state.value),
+                  );
+                  if (time != null) {
+                    state.didChange(DateTime(
+                      date.year,
+                      date.month,
+                      date.day,
+                      time.hour,
+                      time.minute,
+                    ));
+                  }
+                }
+              } else {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext builder) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height / 4,
+                      child: CupertinoDatePicker(
+                        mode: CupertinoDatePickerMode.dateAndTime,
+                        onDateTimeChanged:(DateTime dateTime) => state.didChange(dateTime),
+                        initialDateTime: state.value,
+                        use24hFormat: false,
+                        minuteInterval: 1,
+                      ),
+                    );
+                  },
+                );
               }
             }
           },

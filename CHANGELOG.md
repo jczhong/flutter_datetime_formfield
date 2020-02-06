@@ -1,3 +1,7 @@
+# 0.1.2
+
+- Support iOS style when running on iOS
+
 # 0.1.1
 
 - Fix formatter is null issue
